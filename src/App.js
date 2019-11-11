@@ -5,6 +5,9 @@ import { Header } from './components/Header';
 import { Gallery } from './components/Gallery';
 import { Tweets } from './components/Tweets';
 import SimpleReactLightbox from "simple-react-lightbox";
+import Login from './components/auth/Login';
+import Register from './components/auth/Register'
+import { Profile } from './components/Profile';
 
 const options = {
   overlayColor: "rgb(25, 136, 124)",
@@ -30,9 +33,11 @@ function App() {
     <Router>
       <div>
         <SimpleReactLightbox {...options}>
-          <Route path='/' component={Header} />
+          <Route path='/:id' component={Profile} />
           <Route path='/gallery' component={Gallery} />
           <Route path='/tweets' component={Tweets} />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
         </SimpleReactLightbox>
       </div>
     </Router>
