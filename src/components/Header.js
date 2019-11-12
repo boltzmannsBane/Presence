@@ -1,18 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import firebase from '../firebase'
 import { AuthContext } from './context/AuthContext'
 import { NavLink as Link } from 'react-router-dom';
 
 export const Header = ({ id }) => {
 
-    // const { setUser, setAuthStatus } = useContext(AuthContext)
-
-    // const logout = () => {
-    //     firebase.logout().then(() => {
-    //         setUser(null)
-    //         setAuthStatus(false)
-    //     })
-    // }
+    const { authStatus } = useContext(AuthContext)
 
     return (
         <header>
