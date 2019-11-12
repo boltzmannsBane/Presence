@@ -1,10 +1,14 @@
 import React, { Fragment } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import AuthContextProvider from './components/context/AuthContext';
 import { Header } from './components/Header';
 import { Gallery } from './components/Gallery';
 import { Tweets } from './components/Tweets';
 import SimpleReactLightbox from "simple-react-lightbox";
+import { Login }from './components/auth/Login';
+import { Register } from './components/auth/Register'
+import { Profile } from './components/Profile';
 
 const options = {
   overlayColor: "rgb(25, 136, 124)",
@@ -28,13 +32,17 @@ const options = {
 function App() {
   return (
     <Router>
-      <div>
-        <SimpleReactLightbox {...options}>
-          <Route path='/' component={Header} />
-          <Route path='/gallery' component={Gallery} />
-          <Route path='/tweets' component={Tweets} />
-        </SimpleReactLightbox>
-      </div>
+      <AuthContextProvider>
+        <div>
+          <SimpleReactLightbox {...options}>
+            <Route path='/:id' component={Profile} />
+            <Route path='/:id/gallery' component={Gallery} />
+            <Route path='/:id/tweets' component={Tweets} />
+            <Route path='/' component={Login} exact/>
+            <Route path='/register' component={Register} />
+          </SimpleReactLightbox>
+        </div>
+      </AuthContextProvider>
     </Router>
   )
 }

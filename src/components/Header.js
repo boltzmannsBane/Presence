@@ -1,14 +1,37 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import firebase from '../firebase'
+import { AuthContext } from './context/AuthContext'
 import { NavLink as Link } from 'react-router-dom';
 
-export const Header = () => <header>
-    <img src='https://i.imgur.com/akXQeZ0.jpg' alt='avatar' style={
-        { width: '150px', height: '150px', borderRadius: '50%', objectFit: 'cover' }
-    } />
-    <h1>Amygdala</h1>
-    <h4>23 yo trying to get some bread crumbs</h4>
-    <nav>
-        <Link to='/gallery'>gallery</Link>
-        <Link to='/tweets'>tweets</Link>
-    </nav>
-</header>
+export const Header = ({ id }) => {
+
+    // const { setUser, setAuthStatus } = useContext(AuthContext)
+
+    // const logout = () => {
+    //     firebase.logout().then(() => {
+    //         setUser(null)
+    //         setAuthStatus(false)
+    //     })
+    // }
+
+    return (
+        <header>
+            <img src='' alt='avatar' style={
+                { width: '150px', height: '150px', borderRadius: '50%', objectFit: 'cover' }
+            } />
+            <h1>Name</h1>
+            <h4>Bio</h4>
+            <nav>
+                <Link to={`/${id}/gallery`}>gallery</Link>
+                <Link to={`/${id}/tweets`}>tweets</Link>
+                <Link to={'/'}>login</Link>
+                {/* <form onSubmit={(e) => {
+                    e.preventDefault()
+                    logout()
+                }}>
+                <button>Logout</button>
+                </form> */}
+            </nav>
+        </header>
+    )
+}
