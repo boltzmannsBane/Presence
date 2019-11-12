@@ -6,7 +6,7 @@ import { Header } from './components/Header';
 import { Gallery } from './components/Gallery';
 import { Tweets } from './components/Tweets';
 import SimpleReactLightbox from "simple-react-lightbox";
-import { Login }from './components/auth/Login';
+import Login from './components/auth/Login';
 import { Register } from './components/auth/Register'
 import { Profile } from './components/Profile';
 

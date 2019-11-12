@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react'
 import firebase from '../../firebase'
-import App from '../../App'
 
 export const AuthContext = createContext()
 
@@ -11,6 +10,8 @@ const AuthContextProvider = (props) => {
     useEffect(() => {
         firebase.isInitialized().then(val => val && setAuthStatus(true))
     })
+
+    useEffect(() => authStatus ? console.log('logged in') : console.log('not logged in'), [authStatus])
 
     return (
         <AuthContext.Provider value={{ authStatus, setAuthStatus }}>
