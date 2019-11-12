@@ -5,7 +5,11 @@ import { NavLink as Link } from 'react-router-dom';
 
 export const Header = ({ id }) => {
 
-    const { authStatus } = useContext(AuthContext)
+    const { setAuthStatus } = useContext(AuthContext)
+
+    const Logout = () => {
+        firebase.logout().then(setAuthStatus(false))
+    }
 
     return (
         <header>
@@ -18,12 +22,12 @@ export const Header = ({ id }) => {
                 <Link to={`/${id}/gallery`}>gallery</Link>
                 <Link to={`/${id}/tweets`}>tweets</Link>
                 <Link to={'/'}>login</Link>
-                {/* <form onSubmit={(e) => {
+                <form onSubmit={(e) => {
                     e.preventDefault()
-                    logout()
+                    Logout()
                 }}>
                 <button>Logout</button>
-                </form> */}
+                </form>
             </nav>
         </header>
     )
