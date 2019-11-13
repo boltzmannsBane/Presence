@@ -30,9 +30,11 @@ class Firebase {
     register(name, email, password) {
         this.auth.createUserWithEmailAndPassword(email, password)
         .then(cred => this.db.collection('users').doc(cred.user.uid).set({
-            name: name
+            name: name,
+            avatar: '',
+            tweets: [],
+            gallery: []
         }))
-
     }
 
     isInitialized() {
@@ -71,4 +73,5 @@ class Firebase {
         })
     }
 }
+
 export default new Firebase()
