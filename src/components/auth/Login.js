@@ -11,7 +11,7 @@ const Login = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    async function login() {
+    async function Login() {
         try {
             await firebase.login(email, password).then(res => {
                 props.history.replace(`/${res.user.uid}`)
@@ -27,7 +27,7 @@ const Login = (props) => {
                 <div className='authUI'>
                     <form onSubmit={e => {
                         e.preventDefault()
-                        login()
+                        Login()
                         setEmail('')
                         setPassword('')
                     }}>
