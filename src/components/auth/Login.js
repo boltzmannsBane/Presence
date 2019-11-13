@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from 'react'
+import React, { useState, useEffect, useContext, Fragment } from 'react'
 import firebase from '../../firebase'
 import { AuthContext } from '../context/AuthContext'
 import { withRouter } from 'react-router-dom'
@@ -11,24 +11,26 @@ const Login = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    async function login() {
+    async function Login() {
         try {
-            await firebase.login(email, password).then(res => res && props.history.replace(`/${res.user.uid}`))
-            setAuthStatus(true)
-            setUser(true)
+            await firebase.login(email, password).then(res => {
+                props.history.replace(`/${res.user.uid}`)
+                setAuthStatus(res)
+            })
         } catch (error) { alert(error.message) }
     }
-    
-    return (
-        <Fragment>
+
+    useEffect(() => {authStatus && props.history.replace(`/${authStatus.uid}`)}, [authStatus])
+
+    return <Fragment>
             <div className='auth'>
                 <div className='authUI'>
                     <form onSubmit={e => {
-                            e.preventDefault()
-                            login()
-                            setEmail('')
-                            setPassword('')
-                        }}>
+                        e.preventDefault()
+                        Login()
+                        setEmail('')
+                        setPassword('')
+                    }}>
                         <input
                             type="email"
                             value={email}
@@ -53,7 +55,7 @@ const Login = (props) => {
                 </div>
             </div>
         </Fragment>
-    )
+
 }
 
 export default withRouter(Login)

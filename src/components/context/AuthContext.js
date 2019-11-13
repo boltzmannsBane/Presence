@@ -5,10 +5,10 @@ export const AuthContext = createContext()
 
 const AuthContextProvider = (props) => {
 
-    const [authStatus, setAuthStatus] = useState(false)
+    const [authStatus, setAuthStatus] = useState(null)
 
     useEffect(() => {
-        firebase.isInitialized().then(val => val && setAuthStatus(true))
+        firebase.isInitialized().then(val => setAuthStatus(val))
     })
 
     useEffect(() => authStatus ? console.log('logged in') : console.log('not logged in'), [authStatus])
