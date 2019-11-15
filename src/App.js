@@ -9,6 +9,7 @@ import SimpleReactLightbox from "simple-react-lightbox";
 import Login from './components/auth/Login';
 import { Register } from './components/auth/Register'
 import { Profile } from './components/Profile';
+import Tweet from './components/Tweet';
 
 const options = {
   overlayColor: "rgb(25, 136, 124)",
@@ -36,10 +37,11 @@ function App() {
         <div>
           <SimpleReactLightbox {...options}>
             <Route path='/:id' component={Profile} />
-            <Route path='/:id/gallery' component={Gallery} />
-            <Route path='/:id/tweets' component={Tweets} />
+            <Route path='/:id/gallery' component={Gallery} exact/>
+            <Route path='/:id/tweets' component={Tweets} exact/>
             <Route path='/' component={Login} exact/>
             <Route path='/register' component={Register} />
+            <Route path='/:id/tweets/:tweetId' component={Tweet}/>
           </SimpleReactLightbox>
         </div>
       </AuthContextProvider>

@@ -9,6 +9,13 @@ export const PostForm = ({ elementName, id }) => {
     const [data, setData] = useState('')
     const [sw, setSw] = useState(false)
 
+    function idGenerator() {
+        var S4 = function () {
+            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+        };
+        return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+    }
+
     function Post() {
         authStatus && data && firebase.addTweet(elementName, id, post, data.tweets)
         setSw(prevState => !prevState)
@@ -17,7 +24,6 @@ export const PostForm = ({ elementName, id }) => {
     useEffect(() => {
         firebase.getData('users').doc(id).get().then(res => {
             setData(res.data())
-        // console.log(res.data())
         })
     }, [authStatus, sw])
 
@@ -31,7 +37,13 @@ export const PostForm = ({ elementName, id }) => {
                 value={post.text}
                 name="post"
                 placeholder="what's on your mind?"
-                onChange={e => { setPost({text: e.target.value}) }}
+                onChange={e => {
+                    setPost({
+                        text: e.target.value,
+                        timestamp: new Date().toISOString(),  
+                        id: idGenerator()
+                    })
+                }}
                 required
             />
             <br />
