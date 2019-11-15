@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SRLWrapper } from "simple-react-lightbox";
 import InfiniteScroll from 'react-infinite-scroller';
 import { PostForm } from './PostForm';
+import { NavLink as Link, withRouter } from 'react-router-dom';
 import firebase from '../firebase'
 
 export const Tweets = ({ match: { params: { id } } }) => {
@@ -13,28 +14,6 @@ export const Tweets = ({ match: { params: { id } } }) => {
     useEffect(() => {
         firebase.getData('users').doc(id).onSnapshot(snapshot => setPosts(snapshot.data().tweets))
     }, [])
-
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-    //         const data = await res.json()
-    //         setPosts(data.map((user, index) => <li>
-    //             {
-    //                 <SRLWrapper>
-    //                     <p>{index}</p>
-    //                     <img src='https://images.pexels.com/photos/2977104/pexels-photo-2977104.jpeg' alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />
-    //                     <img src='https://images.pexels.com/photos/948331/pexels-photo-948331.jpeg' alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />
-    //                     <img src='https://images.pexels.com/photos/2938207/pexels-photo-2938207.jpeg' alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />
-    //                     <img src='https://images.pexels.com/photos/2387876/pexels-photo-2387876.jpeg' alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />
-    //                 </SRLWrapper>
-    //             }
-    //         </li>))
-    //     }
-
-    //     fetchData()
-    // }, [])
-
 
     return (
         <section className='tweets'>
@@ -50,7 +29,10 @@ export const Tweets = ({ match: { params: { id } } }) => {
                     loader={<div className="loader" key={0}>Loading ...</div>}>
 
                     {posts.map(post => <li>
+                        <p>{post.timestamp}</p>
                         <p>{post.text}</p>
+                        <p>{post.id}</p>
+                        <Link to={`/${id}/tweets/${post.id}`}>direct link</Link>
                         <SRLWrapper>
                             <img src='https://images.pexels.com/photos/2977104/pexels-photo-2977104.jpeg' alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />
                             <img src='https://images.pexels.com/photos/948331/pexels-photo-948331.jpeg' alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />
@@ -59,7 +41,6 @@ export const Tweets = ({ match: { params: { id } } }) => {
                         </SRLWrapper>
 
                     </li>).slice(0, count)}
-                    {/* {console.log(posts)} */}
 
                 </InfiniteScroll>
             </ul>
