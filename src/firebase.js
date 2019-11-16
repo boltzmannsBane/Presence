@@ -55,7 +55,7 @@ class Firebase {
         })
     }
 
-    addTweet(elementName, userID, post, oldPosts ) {
+    addTweet(userID, post, oldPosts ) {
         this.db.collection('users').doc(userID).update({
             tweets: [post, ...oldPosts]
         }
