@@ -1,13 +1,16 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import firebase from '../firebase'
 import { AuthContext } from './context/AuthContext'
 
-export const PostForm = ({ elementName, id }) => {
+export const PostForm = ({ posts, id }) => {
 
     const { authStatus } = useContext(AuthContext)
-    const [post, setPost] = useState({})
-    const [data, setData] = useState('')
-    const [sw, setSw] = useState(false)
+    const [post, setPost] = useState({
+        text: '',
+        timestamp: '',
+        id: '',
+        images: ['dorito', 'nugget']
+    })
 
     function idGenerator() {
         var S4 = function () {
@@ -17,20 +20,19 @@ export const PostForm = ({ elementName, id }) => {
     }
 
     function Post() {
-        authStatus && data && firebase.addTweet(elementName, id, post, data.tweets)
-        setSw(prevState => !prevState)
+        authStatus && firebase.addTweet(id, post, posts)
     }
-
-    useEffect(() => {
-        firebase.getData('users').doc(id).get().then(res => {
-            setData(res.data())
-        })
-    }, [authStatus, sw])
 
     return authStatus && (
         <form onSubmit={(e) => {
             e.preventDefault()
             Post()
+            setPost({
+                text: '',
+                timestamp: '',
+                id: '',
+                images: []
+            })
         }}>
             <input
                 type="text"
@@ -40,13 +42,24 @@ export const PostForm = ({ elementName, id }) => {
                 onChange={e => {
                     setPost({
                         text: e.target.value,
-                        timestamp: new Date().toISOString(),  
+                        timestamp: new Date().toISOString(),
                         id: idGenerator()
                     })
                 }}
                 required
             />
             <br />
+
+            {/* post.images[0] doesn't work in react. alternatives ?? */}
+
+            <input
+                type="url"
+                value={[post.images[0]]}
+                name="image"
+                placeholder="image 1"
+                onChange={e => console.log(e.target.value)}
+                required
+            />
             <button>Post</button>
         </form>
     )
