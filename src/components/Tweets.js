@@ -17,9 +17,9 @@ export const Tweets = ({ match: { params: { id } } }) => {
         })
     }
 
-// this fails a lot. how do i make .tweets wait for the snapshot?
+    // this fails a lot. how do i make .tweets wait for the snapshot?
 
-// solved with snapshot.data(), but still unsure. how do i error handle this?
+    // solved with snapshot.data(), but still unsure. how do i error handle this?
 
     useEffect(() => {
         firebase.getData('users').doc(id).onSnapshot(snapshot => snapshot.data() && setPosts(snapshot.data().tweets))
@@ -27,7 +27,7 @@ export const Tweets = ({ match: { params: { id } } }) => {
 
     return posts && (
         <section className='tweets'>
-            <PostForm id={id} posts={posts}/>
+            <PostForm id={id} posts={posts} />
             <ul>
                 <InfiniteScroll
                     pageStart={0}
@@ -41,7 +41,7 @@ export const Tweets = ({ match: { params: { id } } }) => {
                     {posts.map(post => <li>
                         <p>{post.timestamp}</p>
                         <article>
-                        <p>{post.text}</p>
+                            <p>{post.text}</p>
                         </article>
                         <p>{post.id}</p>
                         <button onClick={(e) => {
@@ -51,9 +51,7 @@ export const Tweets = ({ match: { params: { id } } }) => {
                         <Link to={`/${id}/tweets/${post.id}`}>direct link</Link>
                         <SRLWrapper>
                             <img src='https://images.pexels.com/photos/2977104/pexels-photo-2977104.jpeg' alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />
-                            <img src='https://images.pexels.com/photos/948331/pexels-photo-948331.jpeg' alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />
-                            <img src='https://images.pexels.com/photos/2938207/pexels-photo-2938207.jpeg' alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />
-                            <img src='https://images.pexels.com/photos/2387876/pexels-photo-2387876.jpeg' alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />
+                            {post.images && post.images.map(image => <img src={image} alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />)}
                         </SRLWrapper>
 
                     </li>).slice(0, count)}
