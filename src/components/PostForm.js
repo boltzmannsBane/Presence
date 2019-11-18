@@ -9,8 +9,9 @@ export const PostForm = ({ posts, id }) => {
         text: '',
         timestamp: '',
         id: '',
-        images: ['dorito', 'nugget']
+        images: []
     })
+    const [image, setImage] = useState('')
 
     function idGenerator() {
         var S4 = function () {
@@ -23,16 +24,22 @@ export const PostForm = ({ posts, id }) => {
         authStatus && firebase.addTweet(id, post, posts)
     }
 
+    const items = ['https://i.imgur.com/mYpFBrT.jpg', 'https://i.imgur.com/q2N1KEj.jpg', 'https://i.imgur.com/2PMvDEX.jpg', 'https://i.imgur.com/5U7nYOp.jpg']
+
+    function Reset() {
+        setPost({
+            text: '',
+            timestamp: '',
+            id: '',
+            images: []
+        })
+    }
+
     return authStatus && (
         <form onSubmit={(e) => {
             e.preventDefault()
             Post()
-            setPost({
-                text: '',
-                timestamp: '',
-                id: '',
-                images: []
-            })
+            Reset()
         }}>
             <input
                 type="text"
@@ -54,12 +61,17 @@ export const PostForm = ({ posts, id }) => {
 
             <input
                 type="url"
-                value={[post.images[0]]}
+                value={image}
                 name="image"
                 placeholder="image 1"
-                onChange={e => console.log(e.target.value)}
-                required
+                onChange={e => setImage(e.target.value)}
             />
+            <button onClick={(e) => {
+                e.preventDefault()
+                setPost(prevPost => ({ ...prevPost, images: [image]}))
+                setImage('')
+                console.log(post)
+            }}>Add Image</button>
             <button>Post</button>
         </form>
     )
