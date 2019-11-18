@@ -50,7 +50,6 @@ export const Tweets = ({ match: { params: { id } } }) => {
                         }}>DELETE</button>
                         <Link to={`/${id}/tweets/${post.id}`}>direct link</Link>
                         <SRLWrapper>
-                            <img src='https://images.pexels.com/photos/2977104/pexels-photo-2977104.jpeg' alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />
                             {post.images && post.images.map(image => <img src={image} alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />)}
                         </SRLWrapper>
 
