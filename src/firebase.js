@@ -29,37 +29,42 @@ class Firebase {
 
     register(name, email, password) {
         this.auth.createUserWithEmailAndPassword(email, password)
-        .then(cred => this.db.collection('users').doc(cred.user.uid).set({
-            name: name,
-            avatar: '',
-            tweets: [],
-            gallery: []
-        }))
+            .then(cred => this.db.collection('users').doc(cred.user.uid).set({
+                name: name,
+                avatar: '',
+                tweets: [],
+                gallery: []
+            }))
     }
 
     isInitialized() {
-		return new Promise(resolve => {
-			this.auth.onAuthStateChanged(resolve)
-		})
+        return new Promise(resolve => {
+            this.auth.onAuthStateChanged(resolve)
+        })
     }
 
     getCurrentUser() {
         return this.auth.currentUser
     }
-    
+
     addComment(collectionName, posterID, content) {
         return this.db.collection(collectionName).add({
             posterID: posterID,
             content: content,
-            timestamp: new Date().toISOString()       
+            timestamp: new Date().toISOString()
         })
     }
 
-    addTweet(userID, post, oldPosts ) {
+    addTweet(userID, post, oldPosts) {
         this.db.collection('users').doc(userID).update({
             tweets: [post, ...oldPosts]
-        }
-        )
+        })
+    }
+
+    addPhoto(userID, post, oldPosts) {
+        this.db.collection('users').doc(userID).update({
+            gallery: [post, ...oldPosts]
+        })
     }
 
     getData(collectionName) {
