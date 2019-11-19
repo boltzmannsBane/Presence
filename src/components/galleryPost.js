@@ -17,18 +17,19 @@ const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
         const getPost = async () => {
             const data = await firebase.getData('users').doc(id).get()
             const { gallery } = data.data()
-            const { text, timestamp } = gallery.filter(obj => obj.id === postId)[0]
-            setPost({ text, timestamp })
+            const { text, timestamp, images } = gallery.filter(obj => obj.id === postId)[0]
+            setPost({ text, timestamp, images })
             setAllPosts(gallery)
         }
 
         getPost()
     }, [])
 
-    return (
+    return post && (
         <Fragment>
             <p>{post.timestamp}</p>
             <h1>{post.text}</h1>
+            {post.images && <img src={post.images[0]} alt='post' style={{ width: '200px', height: '200px', objectFit: 'cover' }}/>}
             <button onClick={(e) => {
                 e.preventDefault()
                 Delete(postId)
