@@ -1,17 +1,12 @@
-import React, { useEffect, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { Header } from './Header'
+import Drawer from './Drawer'
 
 export const Profile = ({ match: { params: { id } } }) => {
     
-    useEffect(() => {
-        console.log(id)
-    })
-
-    return <Fragment>
-        <h1>Profile Component</h1>
-        <Header id={id}/>
-
-    </Fragment>
-
+    return <>
+    <Drawer />
+    <Header id={id}/>
+    </>
 
 }

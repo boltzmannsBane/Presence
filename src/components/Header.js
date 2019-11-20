@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import firebase from '../firebase'
 import { AuthContext } from './context/AuthContext'
 import { NavLink as Link } from 'react-router-dom';
+import { Drawer } from '@material-ui/core';
 
 export const Header = ({ id }) => {
 

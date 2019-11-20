@@ -4,8 +4,12 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { PostForm } from './PostForm';
 import { NavLink as Link } from 'react-router-dom';
 import firebase from '../firebase'
+import { AuthContext } from './context/AuthContext'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 export const Tweets = ({ match: { params: { id } } }) => {
+
+    const { authStatus } = useContext(AuthContext)
 
     const [posts, setPosts] = useState([])
     const [count, setCount] = useState(10)
@@ -28,7 +32,6 @@ export const Tweets = ({ match: { params: { id } } }) => {
     return posts && (
         <section className='tweets'>
             <PostForm id={id} posts={posts} elementName='tweets' />
-            <SRLWrapper>
             <ul>
                 <InfiniteScroll
                     pageStart={0}
@@ -38,24 +41,30 @@ export const Tweets = ({ match: { params: { id } } }) => {
                     }}
                     hasMore={count < posts.length ? true : false}
                     loader={<div className="loader" key={0}>Loading ...</div>}>
-                    
+                    <SRLWrapper>
                         {posts.map(post => <li>
                             <p>{post.timestamp}</p>
                             <article>
                                 <p>{post.text}</p>
                             </article>
                             <p>{post.id}</p>
-                            <button onClick={(e) => {
+
+                            {authStatus && authStatus.uid === id && <button type='button' onClick={(e) => {
                                 e.preventDefault()
                                 Delete(post.id)
-                            }}>DELETE</button>
+                            }}><DeleteForeverIcon /></button>}
+
                             <Link to={`/${id}/tweets/${post.id}`}>direct link</Link>
+
                             <br />
+
                             {post.images && post.images.map(image => <img src={image} alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />)}
+
                         </li>).slice(0, count)}
+                    </SRLWrapper>
                 </InfiniteScroll>
             </ul>
-            </SRLWrapper>
+
         </section>
     )
 }

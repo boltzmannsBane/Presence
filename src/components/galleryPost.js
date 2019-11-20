@@ -1,8 +1,13 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect, useContext, Fragment } from 'react'
 import firebase from '../firebase'
 import { withRouter } from 'react-router-dom';
+import { SimpleSlider } from './Carousel';
+import { AuthContext } from './context/AuthContext'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
+
+    const { authStatus } = useContext(AuthContext)
 
     const [post, setPost] = useState({})
     const [allPosts, setAllPosts] = useState([])
@@ -28,13 +33,13 @@ const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
     return post && (
         <Fragment>
             <p>{post.timestamp}</p>
+            {post.images && <SimpleSlider images={post.images} />}
             <h1>{post.text}</h1>
-            {post.images && <img src={post.images[0]} alt='post' style={{ width: '200px', height: '200px', objectFit: 'cover' }}/>}
-            <button onClick={(e) => {
+            {authStatus && authStatus.uid === id && <button onClick={(e) => {
                 e.preventDefault()
                 Delete(postId)
                 history.replace(`/${id}/gallery`)
-            }}>DELETE</button>
+            }}><DeleteForeverIcon /></button>}
         </Fragment>
     )
 }

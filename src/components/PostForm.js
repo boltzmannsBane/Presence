@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import firebase from '../firebase'
 import { AuthContext } from './context/AuthContext'
 import { Formik, Field, FieldArray, Form, ErrorMessage } from 'formik';
@@ -8,13 +8,6 @@ import * as Yup from 'yup';
 export const PostForm = ({ posts, id, elementName }) => {
 
     const { authStatus } = useContext(AuthContext)
-
-    // function generateId() {
-    //     var S4 = function () {
-    //         return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    //     };
-    //     return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
-    // }
 
     return authStatus && (
         <Formik
