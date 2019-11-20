@@ -1,8 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from './context/AuthContext'
 import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';

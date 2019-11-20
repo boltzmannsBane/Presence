@@ -18,8 +18,11 @@ export const PostForm = ({ posts, id, elementName }) => {
                     .min(1, 'Must be 15 characters or less')
                     .max(250, 'Must be no longer than 250 characters')
                     .required('Required'),
+                images: Yup.array()
+                    .max(4, '4 images or less'),
                 images: Yup.string()
                     .url('Invalid URL')
+
             })}
 
             enableReinitialize={true}

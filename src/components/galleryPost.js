@@ -32,7 +32,7 @@ const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
 
     return post && (
         <Fragment>
-            <p>{post.timestamp}</p>
+            <p>{post.timestamp && post.timestamp.substring(0, 10)}</p>
             {post.images && <SimpleSlider images={post.images} />}
             <h1>{post.text}</h1>
             {authStatus && authStatus.uid === id && <button onClick={(e) => {
