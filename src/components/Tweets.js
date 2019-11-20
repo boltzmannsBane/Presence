@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import PostOptions from './PostOptions'
 import { SRLWrapper } from "simple-react-lightbox";
 import InfiniteScroll from 'react-infinite-scroller';
 import { PostForm } from './PostForm';
@@ -15,7 +16,7 @@ export const Tweets = ({ match: { params: { id } } }) => {
     const [count, setCount] = useState(10)
     const [postsPerLoad] = useState(10)
 
-    const Delete = async (deleteId) => {
+    const handleDelete = async (deleteId) => {
         return firebase.getData('users').doc(id).update({
             tweets: posts.filter(post => post.id !== deleteId)
         })
@@ -49,17 +50,17 @@ export const Tweets = ({ match: { params: { id } } }) => {
                             </article>
                             <p>{post.id}</p>
 
-                            {authStatus && authStatus.uid === id && <button type='button' onClick={(e) => {
+                            {/* {authStatus && authStatus.uid === id && <button type='button' onClick={(e) => {
                                 e.preventDefault()
                                 Delete(post.id)
-                            }}><DeleteForeverIcon /></button>}
+                            }}><DeleteForeverIcon /></button>} */}
 
                             <Link to={`/${id}/tweets/${post.id}`}>direct link</Link>
 
                             <br />
 
                             {post.images && post.images.map(image => <img src={image} alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />)}
-
+                            <PostOptions tweetId={post.id} id={id} handleDelete={handleDelete}/>
                         </li>).slice(0, count)}
                     </SRLWrapper>
                 </InfiniteScroll>
