@@ -17,7 +17,6 @@ export const Gallery = ({ match: { params: { id } } }) => {
     return (
         <>
             <PostForm id={id} posts={posts} elementName='gallery' />
-            <h1>Gallery Component</h1>
             <ul>
                 <InfiniteScroll
                     pageStart={0}
