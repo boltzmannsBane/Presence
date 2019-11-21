@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from './context/AuthContext'
+import { withRouter } from 'react-router-dom';
 import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -11,7 +10,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
-export default function PostOptions({ handleDelete, id, tweetId }) {
+function PostOptions({ history, elementName, handleDelete, id, tweetId }) {
 
     const { authStatus } = useContext(AuthContext)
 
@@ -51,13 +50,15 @@ export default function PostOptions({ handleDelete, id, tweetId }) {
                         {authStatus && authStatus.uid === id && <ListItem button onClick={(e) => {
                             e.preventDefault()
                             handleDelete(tweetId)
+                            elementName === 'galleryPost' && history.replace(`/${id}/gallery`)
+                            elementName === 'tweet' && history.replace(`/${id}/tweets`)
                         }}>
                             <ListItemIcon><DeleteForeverIcon /></ListItemIcon>
                             <ListItemText primary='delete' />
                         </ListItem>}
                         <ListItem button>
                             <ListItemIcon><ShareIcon /></ListItemIcon>
-                            <ListItemText primary='share' />
+                            <ListItemText primary='copy link' />
                         </ListItem>
                     </List>
                 </div>
@@ -65,3 +66,5 @@ export default function PostOptions({ handleDelete, id, tweetId }) {
         </>
     )
 }
+
+export default withRouter(PostOptions)

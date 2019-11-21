@@ -13,18 +13,6 @@ import Tweet from './components/Tweet';
 import galleryPost from './components/galleryPost';
 
 const options = {
-  // overlayColor: "rgb(25, 136, 124)",
-  // captionStyle: {
-  //   captionColor: "#a6cfa5",
-  //   captionFontFamily: "Raleway, sans-serif",
-  //   captionFontSize: "22px",
-  //   captionFontWeight: "300",
-  //   captionFontStyle: "capitalize"
-  // },
-  // buttonsStyle: {
-  //   buttonsBackgroundColor: "#1b5245",
-  //   buttonsIconColor: "rgba(126, 172, 139, 0.8)"
-  // },
   autoplaySpeed: 1500,
   transitionSpeed: 900,
   showCaption: false,

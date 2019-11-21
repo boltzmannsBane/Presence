@@ -9,7 +9,7 @@ const AuthContextProvider = (props) => {
 
     useEffect(() => {
         firebase.isInitialized().then(val => setAuthStatus(val))
-    })
+    }, [])
 
     useEffect(() => authStatus ? console.log('logged in') : console.log('not logged in'), [authStatus])
 

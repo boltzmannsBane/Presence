@@ -3,7 +3,7 @@ import firebase from '../firebase'
 import { withRouter } from 'react-router-dom';
 import { SRLWrapper } from "simple-react-lightbox";
 import { AuthContext } from './context/AuthContext'
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import PostOptions from './PostOptions'
 
 const Tweet = ({ history, match: { params: { id, tweetId } } }) => {
 
@@ -12,7 +12,7 @@ const Tweet = ({ history, match: { params: { id, tweetId } } }) => {
     const [tweet, setTweet] = useState({})
     const [allTweets, setAllTweets] = useState([])
 
-    const Delete = async (deleteId) => {
+    const handleDelete = async (deleteId) => {
         return firebase.getData('users').doc(id).update({
             tweets: allTweets.filter(post => post.id !== deleteId)
         })
@@ -34,14 +34,10 @@ const Tweet = ({ history, match: { params: { id, tweetId } } }) => {
         <Fragment>
             <p>{tweet.timestamp}</p>
             <h1>{tweet.text}</h1>
-            <SRLWrapper>
-                {tweet.images && tweet.images.map(image => <img src={image} style={{ width: '190px', height: '150px', objectFit: 'cover' }} />)}
-            </SRLWrapper>
-            {authStatus && authStatus.uid === id && <button onClick={(e) => {
-                e.preventDefault()
-                Delete(tweetId)
-                history.replace(`/${id}/tweets`)
-            }}><DeleteForeverIcon /></button>}
+            {tweet.images && <SRLWrapper>
+                {tweet.images.map(image => <img src={image} key={image} style={{ width: '190px', height: '150px', objectFit: 'cover' }} />)}
+            </SRLWrapper>}
+            <PostOptions elementName='tweet' tweetId={tweetId} id={id} handleDelete={handleDelete} />
         </Fragment>
     )
 }

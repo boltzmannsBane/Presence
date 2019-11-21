@@ -27,7 +27,7 @@ export const Gallery = ({ match: { params: { id } } }) => {
                     hasMore={count < posts.length ? true : false}
                     loader={<div className="loader" key={0}>Loading ...</div>}>
 
-                    {posts.map(post => <li>
+                    {posts.map(post => <li key={post.id}>
                        <Link to={`/${id}/gallery/${post.id}`}><img src={post.images[0]} alt='preview' style={{ width: '200px', height: '200px', objectFit: 'cover' }}/></Link>
                     </li>).slice(0, count)}
 
