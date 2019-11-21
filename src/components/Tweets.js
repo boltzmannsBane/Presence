@@ -6,7 +6,6 @@ import { PostForm } from './PostForm';
 import { NavLink as Link } from 'react-router-dom';
 import firebase from '../firebase'
 import { AuthContext } from './context/AuthContext'
-import Slide from '@material-ui/core/Slide'
 
 export const Tweets = ({ match: { params: { id } } }) => {
 
@@ -15,12 +14,6 @@ export const Tweets = ({ match: { params: { id } } }) => {
     const [posts, setPosts] = useState([])
     const [count, setCount] = useState(10)
     const [postsPerLoad] = useState(10)
-
-    const [checked, setChecked] = useState(true);
-
-    const handleChange = () => {
-        setChecked(prev => !prev);
-      };
 
     const handleDelete = async (deleteId) => {
         return firebase.getData('users').doc(id).update({
@@ -49,22 +42,23 @@ export const Tweets = ({ match: { params: { id } } }) => {
                     hasMore={count < posts.length ? true : false}
                     loader={<div className="loader" key={0}>Loading ...</div>}>
                     <SRLWrapper>
-                        {posts.map(post => <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
-                            <li>
-                                <p>{post.timestamp.substring(0, 10)}</p>
+                        {posts.map(post => 
+                            <li key={post.id}>
+                                <Link to={`/${id}/tweets/${post.id}`}><p>{post.timestamp.substring(0, 10)}</p></Link>
                                 <article>
                                     <p>{post.text}</p>
                                 </article>
                                 <p>{post.id}</p>
 
-                                <Link to={`/${id}/tweets/${post.id}`}>direct link</Link>
-
                                 <br />
 
-                                {post.images && post.images.map(image => <img src={image} alt='pic' style={{ width: '150px', height: '100px', objectFit: 'cover' }} />)}
+                                {post.images && post.images.map(image => <img src={image} alt='pic' key={image} style={{ width: '150px', height: '100px', objectFit: 'cover' }} />)}
+                                
+                                <br />
+
                                 <PostOptions tweetId={post.id} id={id} handleDelete={handleDelete} />
                             </li>
-                        </Slide>).slice(0, count)}
+                        ).slice(0, count)}
                     </SRLWrapper>
                 </InfiniteScroll>
             </ul>
