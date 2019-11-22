@@ -15,7 +15,8 @@ const Login = (props) => {
         try {
             await firebase.login(email, password).then(res => {
                 props.history.replace(`/${res.user.uid}`)
-                setAuthStatus(res)
+                setAuthStatus(res.user)
+
             })
         } catch (error) { alert(error.message) }
     }

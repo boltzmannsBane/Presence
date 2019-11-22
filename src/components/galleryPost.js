@@ -32,12 +32,12 @@ const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
     }, [])
 
     return post && (
-        <Fragment>
+        <main>
             <p>{post.timestamp && post.timestamp.substring(0, 10)}</p>
             {post.images && <SimpleSlider images={post.images} />}
-            <h1>{post.text}</h1>
+            <article><h1>{post.text}</h1></article>
             <PostOptions elementName='galleryPost' tweetId={postId} id={id} handleDelete={handleDelete} />
-        </Fragment>
+        </main>
     )
 }
 

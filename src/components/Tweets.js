@@ -42,21 +42,24 @@ export const Tweets = ({ match: { params: { id } } }) => {
                     hasMore={count < posts.length ? true : false}
                     loader={<div className="loader" key={0}>Loading ...</div>}>
                     <SRLWrapper>
-                        {posts.map(post => 
+                        {posts.map(post =>
                             <li key={post.id}>
-                                <Link to={`/${id}/tweets/${post.id}`}><p>{post.timestamp.substring(0, 10)}</p></Link>
-                                <article>
-                                    <p>{post.text}</p>
-                                </article>
-                                <p>{post.id}</p>
+                                <main>
+                                    <Link to={`/${id}/tweets/${post.id}`}><p>{post.timestamp.substring(0, 10)}</p></Link>
+                                    <article>
+                                        <p>{post.text}</p>
+                                    </article>
+                                    <p>{post.id}</p>
 
-                                <br />
+                                    <br />
 
-                                {post.images && post.images.map(image => <img src={image} alt='pic' key={image} style={{ width: '150px', height: '100px', objectFit: 'cover' }} />)}
-                                
-                                <br />
+                                    {post.images && post.images.map(image => <img src={image} alt='pic' key={image} style={{ width: '150px', height: '100px', objectFit: 'cover' }} />)}
 
-                                <PostOptions tweetId={post.id} id={id} handleDelete={handleDelete} />
+                                    <br />
+
+                                    <PostOptions tweetId={post.id} id={id} handleDelete={handleDelete} />
+
+                                </main>
                             </li>
                         ).slice(0, count)}
                     </SRLWrapper>
