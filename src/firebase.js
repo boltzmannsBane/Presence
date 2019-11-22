@@ -71,7 +71,19 @@ class Firebase {
         return this.db.collection(collectionName)
     }
 
-    updateProfile(userID, name, avatar) {
+    async updateProfile(email, password) {
+        const user = this.auth.currentUser
+
+        try {
+           user && await user.updateEmail(email)
+        } catch { console.log('email didnt update')}
+
+        try {
+            user && await user.updatePassword(password)
+        } catch {console.log('password didnt update')}
+    }
+
+    updateDisplayInfo(userID, name, avatar) {
         return this.db.collection('users').doc(userID).update({
             name: name,
             avatar: avatar

@@ -31,14 +31,14 @@ const Tweet = ({ history, match: { params: { id, tweetId } } }) => {
     }, [])
 
     return (
-        <Fragment>
+        <main>
             <p>{tweet.timestamp}</p>
-            <h1>{tweet.text}</h1>
+            <article><h1>{tweet.text}</h1></article>
             {tweet.images && <SRLWrapper>
                 {tweet.images.map(image => <img src={image} key={image} style={{ width: '190px', height: '150px', objectFit: 'cover' }} />)}
             </SRLWrapper>}
             <PostOptions elementName='tweet' tweetId={tweetId} id={id} handleDelete={handleDelete} />
-        </Fragment>
+        </main>
     )
 }
 

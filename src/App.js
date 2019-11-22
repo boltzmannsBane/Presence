@@ -11,6 +11,7 @@ import { Register } from './components/auth/Register'
 import { Profile } from './components/Profile';
 import Tweet from './components/Tweet';
 import galleryPost from './components/galleryPost';
+import Settings from './components/Settings'
 
 const options = {
   autoplaySpeed: 1500,
@@ -32,6 +33,7 @@ function App() {
             <Route path='/register' component={Register} />
             <Route path='/:id/tweets/:tweetId' component={Tweet}/>
             <Route path='/:id/gallery/:postId' component={galleryPost} />
+            <Route path='/:id/settings' component={Settings} />
           </SimpleReactLightbox>
         </div>
       </AuthContextProvider>

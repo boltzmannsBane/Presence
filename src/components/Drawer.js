@@ -1,4 +1,5 @@
 import React, { useContext, Fragment } from 'react';
+import firebase from '../firebase'
 import { AuthContext } from './context/AuthContext'
 import { NavLink as Link } from 'react-router-dom';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -18,7 +19,7 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 export default function SwipeableTemporaryDrawer({ id }) {
 
-    const { authStatus } = useContext(AuthContext)
+    const { authStatus, setAuthStatus } = useContext(AuthContext)
 
     const [state, setState] = React.useState({
         top: false,
@@ -26,6 +27,10 @@ export default function SwipeableTemporaryDrawer({ id }) {
         bottom: false,
         right: false,
     });
+
+    const Logout = () => {
+        firebase.logout().then(setAuthStatus(false))
+    }
 
     const toggleDrawer = (side, open) => event => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -51,10 +56,11 @@ export default function SwipeableTemporaryDrawer({ id }) {
                         </ListItem>
                     </Link>}
 
-                <ListItem button>
-                    <ListItemIcon><SettingsIcon /></ListItemIcon>
-                    <ListItemText primary='Edit Profile' />
-                </ListItem>
+                <Link to={`/${id}/settings`}>
+                    <ListItem button>
+                        <ListItemIcon><SettingsIcon /></ListItemIcon>
+                        <ListItemText primary='Edit Profile' />
+                    </ListItem></Link>
 
 
                 <ListItem button>
@@ -62,7 +68,10 @@ export default function SwipeableTemporaryDrawer({ id }) {
                     <ListItemText primary='Copy Link' />
                 </ListItem>
 
-                {authStatus ? <ListItem button>
+                {authStatus ? <ListItem button onClick={(e) => {
+                    e.preventDefault()
+                    Logout()
+                }}>
                     <ListItemIcon>< PowerSettingsNewIcon /></ListItemIcon>
                     <ListItemText primary='Logout' />
                 </ListItem> :
