@@ -21,13 +21,9 @@ export const Tweets = ({ match: { params: { id } } }) => {
         })
     }
 
-    // this fails a lot. how do i make .tweets wait for the snapshot?
-
-    // solved with snapshot.data(), but still unsure. how do i error handle this?
-
     useEffect(() => {
         firebase.getData('users').doc(id).onSnapshot(snapshot => snapshot.data() && setPosts(snapshot.data().tweets))
-    }, [])
+    }, [id])
 
     return (
         <section className='tweets'>
