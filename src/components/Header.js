@@ -9,11 +9,11 @@ export const Header = ({ id }) => {
     const { userInfo, setUserInfo } = useContext(AuthContext)
 
     useEffect(() => {
-        authStatus && firebase.getData('users').doc(id).get().then(doc => {
+         firebase.getData('users').doc(id).get().then(doc => {
             const info = doc.data()
-            const { name, avatar } = info
-            setUserInfo({name, avatar})
-        })
+            const { name, avatar, bio } = info
+            setUserInfo({name, avatar, bio})
+        }).catch(err => console.log(err))
     }, [authStatus])
 
     return (
@@ -21,11 +21,11 @@ export const Header = ({ id }) => {
             <img src={userInfo.avatar ? userInfo.avatar : 'https://i.pinimg.com/564x/38/55/96/385596c2d02cf1221d1532b877212413.jpg'} alt='avatar' style={
                 { width: '150px', height: '150px', borderRadius: '50%', objectFit: 'cover' }
             } />
-            <h1>{userInfo.name}</h1>
-            <h4>Bio</h4>
+            {<h1>{userInfo.name}</h1>}
+            {<h4>{userInfo.bio}</h4>}
             <nav>
-                <Link to={`/${id}/gallery`}>gallery</Link>
-                <Link to={`/${id}/tweets`}>tweets</Link>
+                <Link to={`/users/${id}/gallery`}>gallery</Link>
+                <Link to={`/users/${id}/tweets`}>tweets</Link>
             </nav>
         </header>
     )

@@ -28,7 +28,7 @@ export const Gallery = ({ match: { params: { id } } }) => {
                     loader={<div className="loader" key={0}>Loading ...</div>}>
 
                     {posts.map(post => <li key={post.id}>
-                       <Link to={`/${id}/gallery/${post.id}`}><img src={post.images[0]} alt='preview' style={{ width: '200px', height: '200px', objectFit: 'cover' }}/></Link>
+                       <Link to={`/users/${id}/gallery/${post.id}`}><img src={post.images[0]} alt='preview' style={{ width: '200px', height: '200px', objectFit: 'cover' }}/></Link>
                     </li>).slice(0, count)}
 
                 </InfiniteScroll>

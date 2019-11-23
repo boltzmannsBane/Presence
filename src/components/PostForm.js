@@ -19,9 +19,9 @@ export const PostForm = ({ posts, id, elementName }) => {
                     .max(250, 'Must be no longer than 250 characters')
                     .required('Required'),
                 images: Yup.array()
-                    .max(4, '4 images or less'),
-                images: Yup.string()
-                    .url('Invalid URL')
+                    .min(1, "Gallery requires at least 1 image")
+                    .max(4, '4 images or less')
+                    
 
             })}
 

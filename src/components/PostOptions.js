@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from './context/AuthContext'
 import { withRouter } from 'react-router-dom';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Popover from '@material-ui/core/Popover';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -26,8 +27,11 @@ function PostOptions({ history, elementName, handleDelete, id, tweetId }) {
 
     const open = Boolean(anchorEl);
 
+    let link = `/users/${id}/${elementName}/${tweetId}`
+
     return (
         <>
+
             <button variant="contained" onClick={handlePopoverOpen}>
                 <MoreHorizIcon />
             </button>
@@ -56,13 +60,15 @@ function PostOptions({ history, elementName, handleDelete, id, tweetId }) {
                             <ListItemIcon><DeleteForeverIcon /></ListItemIcon>
                             <ListItemText primary='delete' />
                         </ListItem>}
+                        <CopyToClipboard text={link}>
                         <ListItem button>
                             <ListItemIcon><ShareIcon /></ListItemIcon>
                             <ListItemText primary='copy link' />
                         </ListItem>
+                        </CopyToClipboard>
                     </List>
                 </div>
-            </Popover>
+        </Popover>
         </>
     )
 }
