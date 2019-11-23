@@ -9,21 +9,30 @@ export const PostForm = ({ posts, id, elementName }) => {
 
     const { authStatus } = useContext(AuthContext)
 
+    const galleryValidation = Yup.object({
+        text: Yup.string()
+            .min(1, 'Must be 15 characters or less')
+            .max(250, 'Must be no longer than 250 characters')
+            .required('Required'),
+        images: Yup.array()
+            .min(1, "Gallery requires at least 1 image")
+            .max(4, '4 images or less'),
+    })
+
+    const tweetValidation = Yup.object({
+        text: Yup.string()
+            .min(1, 'Must be 15 characters or less')
+            .max(250, 'Must be no longer than 250 characters')
+            .required('Required'),
+            images: Yup.string()
+            .url('Invalid URL')
+    })
+
     return authStatus && authStatus.uid === id && (
         <Formik
             initialValues={{ text: '', images: [], timestamp: new Date().toISOString(), id: generate() }}
 
-            validationSchema={Yup.object({
-                text: Yup.string()
-                    .min(1, 'Must be 15 characters or less')
-                    .max(250, 'Must be no longer than 250 characters')
-                    .required('Required'),
-                images: Yup.array()
-                    .min(1, "Gallery requires at least 1 image")
-                    .max(4, '4 images or less')
-                    
-
-            })}
+            validationSchema={elementName === 'tweets' ? tweetValidation : galleryValidation}
 
             enableReinitialize={true}
 
