@@ -27,7 +27,7 @@ export const Tweets = ({ match: { params: { id } } }) => {
 
     useEffect(() => {
         firebase.getData('users').doc(id).onSnapshot(snapshot => snapshot.data() && setPosts(snapshot.data().tweets))
-    }, [])
+    }, [id])
 
     return (
         <section className='tweets'>

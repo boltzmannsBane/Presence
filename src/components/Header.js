@@ -14,7 +14,7 @@ export const Header = ({ id }) => {
             const { name, avatar, bio } = info
             setUserInfo({name, avatar, bio})
         }).catch(err => console.log(err))
-    }, [authStatus])
+    }, [id])
 
     return (
         <header>

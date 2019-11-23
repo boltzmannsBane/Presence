@@ -47,9 +47,9 @@ export default function SwipeableTemporaryDrawer({ id }) {
             onKeyDown={toggleDrawer(side, false)}
         >
             <List>
-                {authStatus && authStatus.uid === id &&
+                {authStatus &&
 
-                    <Link to={`/users/${id}/gallery`}>
+                    <Link to={`/users/${authStatus.uid}/gallery`}>
                         <ListItem button>
                             <ListItemIcon>< HomeIcon /></ListItemIcon>
                             <ListItemText primary='Home' />

@@ -12,7 +12,7 @@ export const Gallery = ({ match: { params: { id } } }) => {
 
     useEffect(() => {
         firebase.getData('users').doc(id).onSnapshot(snapshot => snapshot.data() && setPosts(snapshot.data().gallery))
-    }, [])
+    }, [id])
 
     return (
         <>
