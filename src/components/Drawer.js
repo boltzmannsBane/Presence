@@ -49,14 +49,14 @@ export default function SwipeableTemporaryDrawer({ id }) {
             <List>
                 {authStatus && authStatus.uid === id &&
 
-                    <Link to={`/${id}/gallery`}>
+                    <Link to={`/users/${id}/gallery`}>
                         <ListItem button>
                             <ListItemIcon>< HomeIcon /></ListItemIcon>
                             <ListItemText primary='Home' />
                         </ListItem>
                     </Link>}
 
-                <Link to={`/${id}/settings`}>
+                <Link to={`/users/${id}/settings`}>
                     <ListItem button>
                         <ListItemIcon><SettingsIcon /></ListItemIcon>
                         <ListItemText primary='Edit Profile' />

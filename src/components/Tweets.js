@@ -29,7 +29,7 @@ export const Tweets = ({ match: { params: { id } } }) => {
         firebase.getData('users').doc(id).onSnapshot(snapshot => snapshot.data() && setPosts(snapshot.data().tweets))
     }, [])
 
-    return posts && (
+    return (
         <section className='tweets'>
             <PostForm id={id} posts={posts} elementName='tweets' />
             <ul>
@@ -45,7 +45,7 @@ export const Tweets = ({ match: { params: { id } } }) => {
                         {posts.map(post =>
                             <li key={post.id}>
                                 <main>
-                                    <Link to={`/${id}/tweets/${post.id}`}><p>{post.timestamp.substring(0, 10)}</p></Link>
+                                    <Link to={`/users/${id}/tweets/${post.id}`}><p>{post.timestamp.substring(0, 10)}</p></Link>
                                     <article>
                                         <p>{post.text}</p>
                                     </article>
@@ -57,7 +57,7 @@ export const Tweets = ({ match: { params: { id } } }) => {
 
                                     <br />
 
-                                    <PostOptions tweetId={post.id} id={id} handleDelete={handleDelete} />
+                                    <PostOptions elementName='tweets' tweetId={post.id} id={id} handleDelete={handleDelete} />
 
                                 </main>
                             </li>

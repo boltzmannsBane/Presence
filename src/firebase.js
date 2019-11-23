@@ -27,24 +27,16 @@ class Firebase {
         return this.auth.signOut()
     }
 
-    register(name, email, password) {
-        this.auth.createUserWithEmailAndPassword(email, password)
-            .then(cred => this.db.collection('users').doc(cred.user.uid).set({
-                name: name,
-                avatar: '',
-                tweets: [],
-                gallery: []
-            }))
+    async register(name, email, password) {
+        const cred = await this.auth.createUserWithEmailAndPassword(email, password)
+
+        return cred
     }
 
     isInitialized() {
         return new Promise(resolve => {
             this.auth.onAuthStateChanged(resolve)
         })
-    }
-
-    getCurrentUser() {
-        return this.auth.currentUser
     }
 
     addComment(collectionName, posterID, content) {
@@ -83,10 +75,11 @@ class Firebase {
         } catch {console.log('password didnt update')}
     }
 
-    updateDisplayInfo(userID, name, avatar) {
+    updateDisplayInfo(userID, name, avatar, bio) {
         return this.db.collection('users').doc(userID).update({
             name: name,
-            avatar: avatar
+            avatar: avatar,
+            bio: bio
         })
     }
 }

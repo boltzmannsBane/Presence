@@ -21,7 +21,7 @@ const Login = (props) => {
         } catch (error) { alert(error.message) }
     }
 
-    useEffect(() => {authStatus && props.history.replace(`/${authStatus.uid}`)}, [authStatus])
+    useEffect(() => {authStatus && props.history.replace(`/users/${authStatus.uid}`)}, [authStatus])
 
     return <Fragment>
             <div className='auth'>

@@ -4,7 +4,6 @@ import { AuthContext } from './context/AuthContext'
 import { withRouter } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { generate } from "shortid";
 
 const Settings = ({ history, match: { params: { id } } }) => {
 
@@ -12,24 +11,26 @@ const Settings = ({ history, match: { params: { id } } }) => {
     const { authStatus } = useContext(AuthContext)
 
 
-    const { name, avatar } = userInfo
+    const { name, avatar, bio } = userInfo
 
     useEffect(() => { console.log(userInfo, authStatus) }, [userInfo])
 
     return authStatus && userInfo && authStatus.uid === id ? <>
 
         <Formik
-            initialValues={{ name: name, avatar: avatar }}
+            initialValues={{ name: name, avatar: avatar, bio: bio }}
             validationSchema={Yup.object({
                 name: Yup.string()
                     .min(2, 'Too short')
                     .max(15, 'Must be 15 characters or less')
                     .required('Required'),
                 avatar: Yup.string()
-                    .url('Invalid URL')
+                    .url('Invalid URL'),
+                bio: Yup.string()
+                .max(250, '250 symbols or shorter')
             })}
             onSubmit={(values) => {
-                firebase.updateDisplayInfo(id, values.name, values.avatar)
+                firebase.updateDisplayInfo(id, values.name, values.avatar, values.bio)
                 setUserInfo(values)
             }}
         >
@@ -41,6 +42,10 @@ const Settings = ({ history, match: { params: { id } } }) => {
                 <label htmlFor="avatar">avatar</label>
                 <Field name="avatar" type="text" />
                 <ErrorMessage name="avatar" />
+                <br />
+                <label htmlFor="bio">bio</label>
+                <Field name="bio" type="text" />
+                <ErrorMessage name="bio" />
                 <br />
                 <button type="submit">Submit</button>
             </Form>
@@ -68,7 +73,7 @@ const Settings = ({ history, match: { params: { id } } }) => {
 
             onSubmit={(values) => {
                 firebase.updateProfile(values.email, values.password)
-                history.replace(`/${id}/gallery`)
+                history.replace(`/users/${id}/gallery`)
             }}
         >
             <Form>
