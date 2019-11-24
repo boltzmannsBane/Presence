@@ -25,6 +25,7 @@ const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
             const { gallery } = data.data()
             const { text, timestamp, images } = gallery.filter(obj => obj.id === postId)[0]
             setPost({ text, timestamp, images })
+            console.log(images)
             setAllPosts(gallery)
         }
 
@@ -34,7 +35,7 @@ const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
     return post && (
         <main>
             <p>{post.timestamp && post.timestamp.substring(0, 10)}</p>
-            {post.images && <SimpleSlider images={post.images} />}
+            <SimpleSlider images={post.images} />
             <article><h1>{post.text}</h1></article>
             <PostOptions elementName='galleryPost' tweetId={postId} id={id} handleDelete={handleDelete} />
         </main>

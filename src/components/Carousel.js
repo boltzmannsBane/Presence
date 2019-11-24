@@ -1,14 +1,15 @@
-import React from 'react';
-import Slider from 'infinite-react-carousel';
+import React, { useState, useEffect } from 'react';
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-export const SimpleSlider = ({ images }) => (
-    <Slider
-        dots
-        arrowsBlock={false}
-        arrows={true}
-        prevArrow={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/></svg>}
-        nextArrow={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/></svg>}
+export const SimpleSlider = ({ images }) =>
+    <Carousel
+        autoPlay={false}
+        showStatus={false}
+        showThumbs={false}
+        useKeyboardArrows={true}
     >
-        {images && images.map(image => <div key={image}><img src={image} alt={image} style={{ width: '100%', height: window.innerWidth, objectFit: 'cover' }} /></div>)}
-    </Slider>
-);
+        {images && images.map(image =>
+            <div key={image}><img src={image} alt={image} style={{ width: '100%', height: window.innerWidth, objectFit: 'cover' }} /></div>)}
+        {/* {images && <div><img src={images[0]} alt='img' style={{ width: '100%', height: window.innerWidth, objectFit: 'cover' }} /></div>} */}
+    </Carousel>
