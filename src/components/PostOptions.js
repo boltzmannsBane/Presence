@@ -54,8 +54,8 @@ function PostOptions({ history, elementName, handleDelete, id, tweetId }) {
                         {authStatus && authStatus.uid === id && <ListItem button onClick={(e) => {
                             e.preventDefault()
                             handleDelete(tweetId)
-                            elementName === 'galleryPost' && history.replace(`/${id}/gallery`)
-                            elementName === 'tweet' && history.replace(`/${id}/tweets`)
+                            elementName === 'galleryPost' && history.replace(`/users/${id}/gallery`)
+                            elementName === 'tweet' && history.replace(`/users/${id}/tweets`)
                         }}>
                             <ListItemIcon><DeleteForeverIcon /></ListItemIcon>
                             <ListItemText primary='delete' />
