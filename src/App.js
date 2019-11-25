@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import './App.css';
+import './style/App.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AuthContextProvider from './components/context/AuthContext';
 import { Header } from './components/Header';
@@ -12,6 +12,7 @@ import { Profile } from './components/Profile';
 import Tweet from './components/Tweet';
 import galleryPost from './components/galleryPost';
 import Settings from './components/Settings'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 const options = {
   autoplaySpeed: 1500,
@@ -24,8 +25,8 @@ function App() {
   return (
     <Router>
       <AuthContextProvider>
-        <div>
           <SimpleReactLightbox {...options}>
+            <CssBaseline />
             <Route path='/users/:id' component={Profile}/>
             <Route path='/users/:id/gallery' component={Gallery} exact/>
             <Route path='/users/:id/tweets' component={Tweets} exact exact/>
@@ -35,7 +36,6 @@ function App() {
             <Route path='/users/:id/gallery/:postId' component={galleryPost} />
             <Route path='/users/:id/settings' component={Settings} />
           </SimpleReactLightbox>
-        </div>
       </AuthContextProvider>
     </Router>
   )

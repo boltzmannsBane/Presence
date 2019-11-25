@@ -4,6 +4,8 @@ import { AuthContext } from './context/AuthContext'
 import { Formik, Field, FieldArray, Form, ErrorMessage } from 'formik';
 import { generate } from "shortid";
 import * as Yup from 'yup';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 export const PostForm = ({ posts, id, elementName }) => {
 
@@ -57,13 +59,14 @@ export const PostForm = ({ posts, id, elementName }) => {
                                             type="button"
                                             onClick={() => arrayHelpers.remove(index)} // remove an image from the list
                                         >
-                                            -
+                                            <HighlightOffIcon />
                     </button>
                                         <button
                                             type="button"
                                             onClick={() => arrayHelpers.insert(index, "")} // insert an empty string at a position
                                         >
-                                            +
+                                            
+                                            <AddBoxIcon color='primary'/>
                     </button>
                                     </div>
                                 ))

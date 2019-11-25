@@ -6,6 +6,7 @@ import { PostForm } from './PostForm';
 import { NavLink as Link } from 'react-router-dom';
 import firebase from '../firebase'
 import { AuthContext } from './context/AuthContext'
+import Divider from '@material-ui/core/Divider';
 
 export const Tweets = ({ match: { params: { id } } }) => {
 
@@ -45,14 +46,11 @@ export const Tweets = ({ match: { params: { id } } }) => {
                                     <article>
                                         <p>{post.text}</p>
                                     </article>
-                                    <p>{post.id}</p>
-
-                                    <br />
 
                                     {post.images && post.images.map(image => <img src={image} alt='pic' key={image} style={{ width: '150px', height: '100px', objectFit: 'cover' }} />)}
 
                                     <br />
-
+                                    <Divider />
                                     <PostOptions elementName='tweets' tweetId={post.id} id={id} handleDelete={handleDelete} />
 
                                 </main>
