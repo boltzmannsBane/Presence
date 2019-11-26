@@ -51,7 +51,7 @@ const Header = ( { history, id }) => {
                 <div className="user-info">
                     {<h1>{userInfo.name}</h1>}
                     <div className="break"></div>
-                    {<p>{userInfo.bio}</p>}
+                    {<p style={{margin: '5px'}}>{userInfo.bio}</p>}
                 </div>
                 <div className="break"></div>
             </header>

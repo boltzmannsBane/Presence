@@ -3,7 +3,9 @@ import firebase from '../../firebase'
 import { AuthContext } from '../context/AuthContext'
 import { withRouter } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
+import { SubmitButton } from '../SubmitButton';
 
 const Register = (props) => {
 
@@ -11,7 +13,9 @@ const Register = (props) => {
 
     useEffect(() => { authStatus && props.history.replace(`/users/${authStatus.uid}`) }, [authStatus])
 
-    return (<Formik
+    return (<>
+    <h1 style={{ marginLeft: '30px' }}>Register</h1>
+    <Formik
         initialValues={{ name: '', email: '', password: '', confirmPassword: '' }}
 
         validationSchema={Yup.object({
@@ -49,26 +53,20 @@ const Register = (props) => {
                 })
         }}
     >
-        <Form>
-            <label htmlFor="name">name</label>
-            <Field name="name" type="text" />
-            <ErrorMessage name="name" />
+        <Form style={{ marginLeft: '30px' }}>
+          
+            <Field name="name" type="text" label='display name' component={TextField} style={{ marginTop: '10px', width: '50%' }}/>
             <br />
-            <label htmlFor="email">Email</label>
-            <Field name="email" type="text" />
-            <ErrorMessage name="email" />
+            <Field name="email" type="text" label='email' component={TextField} style={{ marginTop: '10px', width: '50%' }}/>
             <br />
-            <label htmlFor="password">Password</label>
-            <Field name="password" type="password" />
-            <ErrorMessage name="password" />
+            <Field name="password" type="password" label='password' component={TextField} style={{ marginTop: '10px', width: '50%' }}/>
             <br />
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <Field name="confirmPassword" type="password" />
-            <ErrorMessage name="confirmPassword" />
+            <Field name="confirmPassword" type="password" label='confirm password' component={TextField} style={{ marginTop: '10px', width: '50%' }}/>
             <br />
-            <button type="submit">Submit</button>
+            <SubmitButton/>
         </Form>
-    </Formik>)
+    </Formik>
+    </>)
 }
 
 export default withRouter(Register)

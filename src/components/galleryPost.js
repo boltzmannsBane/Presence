@@ -33,9 +33,9 @@ const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
     }, [])
 
     return post && (
-        <main>
-            <p>{post.timestamp && post.timestamp.substring(0, 10)}</p>
+        <main style={{minHeight: '90vh'}}>
             <SimpleSlider images={post.images} />
+            <p>{post.timestamp && post.timestamp.substring(0, 10)}</p>
             <article><h1>{post.text}</h1></article>
             <PostOptions elementName='galleryPost' tweetId={postId} id={id} handleDelete={handleDelete} />
         </main>
