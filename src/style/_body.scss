@@ -2,17 +2,31 @@ body {
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	background: linear-gradient(to right, #caa0c3, #eb7944);
+    background: linear-gradient(to right, #caa0c3, #eb7944);
+    .tweet {
+        min-height: 50vh;
+        height: auto;
+        div {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            img {
+                width: 170px;
+                height: 140px;
+            }
+        }
+    }
+    button {
+        border: none;
+        background: white;
+    }
 	.break {
 		width: 100%;
-	}
-	button {
-		border: none;
 	}
 	a {
 		text-decoration: none;
 		color: black;
-		cursor: pointer;
 	}
 	ul {
 		list-style: none;
@@ -122,7 +136,21 @@ body {
 @media screen and (min-width: 1900px) {
 	body {
 		#root {
-			width: 40%;
+            width: 40%;
+            .tweet {
+                min-height: 50vh;
+                height: auto;
+                div {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+                    img {
+                        width: 300px;
+                        height: 252px;
+                    }
+                }
+            }
 			header {
 				padding-top: 70px;
 				.user-info {

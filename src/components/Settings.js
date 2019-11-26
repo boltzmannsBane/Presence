@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import firebase from '../firebase'
 import { AuthContext } from './context/AuthContext'
 import { withRouter } from 'react-router-dom'
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form} from 'formik';
 import { TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
 import Divider from '@material-ui/core/Divider';
@@ -15,8 +15,6 @@ const Settings = ({ history, match: { params: { id } } }) => {
 
 
     const { name, avatar, bio } = userInfo
-
-    useEffect(() => { console.log(userInfo, authStatus) }, [userInfo])
 
     return authStatus && userInfo && authStatus.uid === id ? <div style={{ minHeight: '80vh' }}>
 

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import { PostForm } from './PostForm';
 import { NavLink as Link } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -22,7 +22,6 @@ export const Gallery = ({ match: { params: { id } } }) => {
                     pageStart={0}
                     loadMore={() => {
                         setCount(prevState => prevState + postsPerLoad)
-                        console.log('loading')
                     }}
                     hasMore={count < posts.length ? true : false}
                     loader={<div className="loader" key={0}>Loading ...</div>}>

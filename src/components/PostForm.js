@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import firebase from '../firebase'
 import { AuthContext } from './context/AuthContext'
-import { Formik, Field, FieldArray, Form, ErrorMessage } from 'formik';
+import { Formik, Field, FieldArray, Form } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { generate } from "shortid";
 import * as Yup from 'yup';
@@ -16,16 +16,18 @@ export const PostForm = ({ posts, id, elementName }) => {
 
     const { authStatus } = useContext(AuthContext)
 
+    const ratio = window.innerHeight > window.innerWidth
+
+    const style = ratio ? {width: '70%'} : {width: '50%'}
+
     const galleryValidation = Yup.object({
         text: Yup.string()
             .min(1, 'Must be 15 characters or less')
-            .max(250, 'Must be no longer than 250 characters')
+            .max(500, 'Must be no longer than 500 characters')
             .required('Required'),
         images: Yup.array()
             .min(1, "Gallery requires at least 1 image")
             .max(4, '4 images or less'),
-        images: Yup.string()
-            .required("Can't post an empy field")
     })
 
     const tweetValidation = Yup.object({
@@ -48,7 +50,6 @@ export const PostForm = ({ posts, id, elementName }) => {
             onSubmit={(values, { resetForm, initialValues }) => {
                 authStatus && elementName === 'tweets' ? firebase.addTweet(id, values, posts) : firebase.addPhoto(id, values, posts)
                 resetForm(initialValues)
-                console.log(values)
             }}
         >{({ values }) => (
             <Form style={{marginLeft: '30px'}}>
@@ -62,7 +63,7 @@ export const PostForm = ({ posts, id, elementName }) => {
                     rowsMax={10}
                     margin="normal"
                     variant="outlined"
-                    style={{width: '50%'}}
+                    style={{width: '80%'}}
                 />
                 <FieldArray
                     name="images"
@@ -75,7 +76,7 @@ export const PostForm = ({ posts, id, elementName }) => {
                                         name={`images.${index}`} 
                                         component={TextField}
                                         variant='outlined'
-                                        style={{width: '50%', marginTop: '10px'}}/>
+                                        style={{width: '70%', marginTop: '10px'}}/>
                                         <button
                                             type="button"
                                             onClick={() => arrayHelpers.remove(index)} // remove an image from the list
@@ -92,7 +93,7 @@ export const PostForm = ({ posts, id, elementName }) => {
                                     </div>
                                 ))
                             ) : (
-                    <Button type="button" variant="contained" color="primary" style={{marginTop: '10px'}} onClick={() => arrayHelpers.push("")} >
+                    <Button type="button" variant="contained" color="primary" style={{marginTop: '20px'}} onClick={() => arrayHelpers.push("")} >
                         Add Image
                     </Button>
                                 )}
@@ -103,7 +104,7 @@ export const PostForm = ({ posts, id, elementName }) => {
                     )}
                 />
                 <pre style={{marginTop: '30px', marginLeft:'0px'}}>
-                    <ul style={{width: '40%', display: 'flex', flexWrap: 'wrap', flexDirection: 'row', margin: '0', padding: '0' }}>
+                    <ul style={{...style, display: 'flex', flexWrap: 'wrap', flexDirection: 'row', margin: '0', padding: '0' }}>
                         {values.images && values.images.map((image) => image && <li key={image} style={{display: 'inline-block', margin: '0', padding: '0'}}><img src={image} alt='pic' style={{ width: '100px', height: '70px', objectFit: 'cover' }} /></li>)}
                     </ul>
                 </pre>
