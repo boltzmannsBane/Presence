@@ -3,7 +3,10 @@ import firebase from '../firebase'
 import { AuthContext } from './context/AuthContext'
 import { withRouter } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
+import Divider from '@material-ui/core/Divider';
+import { SubmitButton } from './SubmitButton';
 
 const Settings = ({ history, match: { params: { id } } }) => {
 
@@ -15,7 +18,9 @@ const Settings = ({ history, match: { params: { id } } }) => {
 
     useEffect(() => { console.log(userInfo, authStatus) }, [userInfo])
 
-    return authStatus && userInfo && authStatus.uid === id ? <>
+    return authStatus && userInfo && authStatus.uid === id ? <div style={{ minHeight: '80vh' }}>
+
+        <h2 style={{marginLeft: '30px'}}>Display Info</h2>
 
         <Formik
             initialValues={{ name: name, avatar: avatar, bio: bio }}
@@ -27,31 +32,36 @@ const Settings = ({ history, match: { params: { id } } }) => {
                 avatar: Yup.string()
                     .url('Invalid URL'),
                 bio: Yup.string()
-                .max(250, '250 symbols or shorter')
+                    .max(250, '250 symbols or shorter')
             })}
             onSubmit={(values) => {
                 firebase.updateDisplayInfo(id, values.name, values.avatar, values.bio)
                 setUserInfo(values)
             }}
         >
-            <Form>
-                <label htmlFor="name">Display Name</label>
-                <Field name="name" type="text" />
-                <ErrorMessage name="name" />
+            <Form style={{ marginLeft: '30px' }}>
+
+                <Field name="name" type="text" label='display name' component={TextField} style={{ marginTop: '10px', width: '50%' }} />
+
                 <br />
-                <label htmlFor="avatar">avatar</label>
-                <Field name="avatar" type="text" />
-                <ErrorMessage name="avatar" />
+
+                <Field name="avatar" type="text" label='avatar' component={TextField} style={{ marginTop: '10px', width: '50%' }} />
+
                 <br />
-                <label htmlFor="bio">bio</label>
-                <Field name="bio" type="text" />
-                <ErrorMessage name="bio" />
+
+                <Field name="bio" type="text" label='bio' component={TextField} multiline rows={4} rowsMax={10} variant='outlined' style={{ marginTop: '30px', width: '50%' }} />
+
                 <br />
-                <button type="submit">Submit</button>
+
+                <SubmitButton/>
             </Form>
         </Formik>
 
         <br />
+
+        <Divider />
+
+        <h2 style={{marginLeft: '30px'}}>Credentials</h2>
 
         <Formik
             initialValues={{ email: authStatus.email, password: '', confirmPassword: '' }}
@@ -76,25 +86,26 @@ const Settings = ({ history, match: { params: { id } } }) => {
                 history.replace(`/users/${id}/gallery`)
             }}
         >
-            <Form>
-                <label htmlFor="email">Email</label>
-                <Field name="email" type="text" />
-                <ErrorMessage name="email" />
+            <Form style={{ marginLeft: '30px' }}>
+
+                <Field name="email" type="text" label='email' component={TextField} style={{ marginTop: '10px', width: '50%' }} />
+
                 <br />
-                <label htmlFor="password">Password</label>
-                <Field name="password" type="password" />
-                <ErrorMessage name="password" />
+
+                <Field name="password" type="password" label='new password' component={TextField} style={{ marginTop: '10px', width: '50%' }} />
+
                 <br />
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <Field name="confirmPassword" type="password" />
-                <ErrorMessage name="confirmPassword" />
+
+                <Field name="confirmPassword" type="password" label='confirm new password' component={TextField} style={{ marginTop: '10px', width: '50%' }} />
+
                 <br />
-                <button type="submit">Submit</button>
+
+                <SubmitButton/>
             </Form>
         </Formik>
 
 
-    </>
+    </div>
         : <h1>Lack of Permissions</h1>
 }
 

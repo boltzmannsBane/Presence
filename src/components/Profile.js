@@ -5,8 +5,10 @@ import Divider from '@material-ui/core/Divider';
 
 export const Profile = ({ history, match: { params: { id } } }) => {
 
+    let ratio = window.innerHeight > window.innerWidth
+
     return <>
-        <nav>
+        <nav style={ratio ? {background: 'linear-gradient(to right, #caa0c3, #eb7944)'}: {}}>
             <h2>プレゼンス</h2>
             <Drawer id={id} />
         </nav>
