@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './style/App.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AuthContextProvider from './components/context/AuthContext';
-import { Header } from './components/Header';
 import { Gallery } from './components/Gallery';
 import { Tweets } from './components/Tweets';
 import SimpleReactLightbox from "simple-react-lightbox";

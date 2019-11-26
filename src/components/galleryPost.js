@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useContext, Fragment } from 'react'
+import React, { useState, useEffect } from 'react'
 import firebase from '../firebase'
 import { withRouter } from 'react-router-dom';
 import { SimpleSlider } from './Carousel';
-import { AuthContext } from './context/AuthContext'
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import PostOptions from './PostOptions';
+import { Footer } from './Footer';
 
 const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
-
-    const { authStatus } = useContext(AuthContext)
 
     const [post, setPost] = useState({})
     const [allPosts, setAllPosts] = useState([])
@@ -25,7 +22,6 @@ const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
             const { gallery } = data.data()
             const { text, timestamp, images } = gallery.filter(obj => obj.id === postId)[0]
             setPost({ text, timestamp, images })
-            console.log(images)
             setAllPosts(gallery)
         }
 
@@ -33,12 +29,20 @@ const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
     }, [])
 
     return post && (
-        <main style={{minHeight: '90vh'}}>
+        <>
+        <main style={{ minHeight: '90vh' }}>
             <SimpleSlider images={post.images} />
-            <p>{post.timestamp && post.timestamp.substring(0, 10)}</p>
-            <article><h1>{post.text}</h1></article>
-            <PostOptions elementName='galleryPost' tweetId={postId} id={id} handleDelete={handleDelete} />
+            <div style={{ margin: '10px' }}>
+                <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                    <h3>{post.timestamp && post.timestamp.substring(0, 10)}</h3>
+                    <PostOptions elementName='galleryPost' tweetId={postId} id={id} handleDelete={handleDelete}/>
+                </div>
+                <article style={{margin: '0 20px 0 20px'}}><p>{post.text}</p></article>
+            </div>
+
         </main>
+        <Footer />
+        </>
     )
 }
 

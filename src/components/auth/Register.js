@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import firebase from '../../firebase'
 import { AuthContext } from '../context/AuthContext'
 import { withRouter } from 'react-router-dom'
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import { TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
 import { SubmitButton } from '../SubmitButton';
@@ -49,7 +49,6 @@ const Register = (props) => {
                     })
                     cred && setAuthStatus(cred.user)
                     authStatus && props.history.replace(`/users/${cred.user.uid}`)
-                    console.log('ayy')
                 })
         }}
     >
