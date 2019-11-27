@@ -36,7 +36,6 @@ function PostOptions({ history, elementName, handleDelete, id, tweetId }) {
                 <MoreHorizIcon />
             </button>
             <Popover
-                // id={id}
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handlePopoverClose}
