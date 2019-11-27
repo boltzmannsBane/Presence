@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import firebase from '../firebase'
 import { AuthContext } from './context/AuthContext'
 import { NavLink as Link } from 'react-router-dom';
@@ -15,13 +15,14 @@ import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 
 export default function SwipeableTemporaryDrawer({ id }) {
 
     const { authStatus, setAuthStatus } = useContext(AuthContext)
 
-    const [state, setState] = React.useState({
+    const [state, setState] = useState({
         top: false,
         left: false,
         bottom: false,
@@ -40,6 +41,8 @@ export default function SwipeableTemporaryDrawer({ id }) {
         setState({ ...state, [side]: open });
     };
 
+    const link = `/users/${id}/gallery`
+
     const sideList = side => (
         <div
             role="presentation"
@@ -49,12 +52,13 @@ export default function SwipeableTemporaryDrawer({ id }) {
             <List>
                 {authStatus &&
 
-                    <>                    <Link to={`/users/${authStatus.uid}/gallery`}>
-                        <ListItem button>
-                            <ListItemIcon>< HomeIcon /></ListItemIcon>
-                            <ListItemText primary='Home' />
-                        </ListItem>
-                    </Link>
+                    <>
+                        <Link to={`/users/${authStatus.uid}/gallery`}>
+                            <ListItem button>
+                                <ListItemIcon>< HomeIcon /></ListItemIcon>
+                                <ListItemText primary='Home' />
+                            </ListItem>
+                        </Link>
 
                         <Link to={`/users/${id}/settings`}>
                             <ListItem button>
@@ -63,11 +67,12 @@ export default function SwipeableTemporaryDrawer({ id }) {
                             </ListItem></Link></>
                 }
 
-
-                <ListItem button>
-                    <ListItemIcon><MobileScreenShareIcon /></ListItemIcon>
-                    <ListItemText primary='Copy Link' />
-                </ListItem>
+                {authStatus && authStatus.uid === id && <CopyToClipboard text={link}>
+                    <ListItem button>
+                        <ListItemIcon><MobileScreenShareIcon /></ListItemIcon>
+                        <ListItemText primary='Copy Link' />
+                    </ListItem>
+                </CopyToClipboard>}
 
                 {authStatus ? <ListItem button onClick={(e) => {
                     e.preventDefault()

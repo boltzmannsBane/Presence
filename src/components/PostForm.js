@@ -20,6 +20,17 @@ export const PostForm = ({ posts, id, elementName }) => {
 
     const style = ratio ? {width: '70%'} : {width: '50%'}
 
+    const validateURL = (value) => {
+        let error;
+        if (!value) {
+          error = 'Required';
+        } else if (!/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+        .test(value)) {
+          error = 'Invalid URL';
+        }
+        return error;
+    }
+
     const galleryValidation = Yup.object({
         text: Yup.string()
             .min(1, 'Must be 15 characters or less')
@@ -35,8 +46,6 @@ export const PostForm = ({ posts, id, elementName }) => {
             .min(1, 'Must be 15 characters or less')
             .max(250, 'Must be no longer than 250 characters')
             .required('Required'),
-        images: Yup.string()
-            .url('Invalid URL')
     })
 
     return authStatus && authStatus.uid === id && (
@@ -73,6 +82,7 @@ export const PostForm = ({ posts, id, elementName }) => {
                                 values.images.map((image, index) => (
                                     <div key={index} style={{display: 'flex', alignItems: 'baseline'}}>
                                         <Field 
+                                        validate={validateURL}
                                         name={`images.${index}`} 
                                         component={TextField}
                                         variant='outlined'

@@ -44,7 +44,7 @@ export const Tweets = ({ match: { params: { id } } }) => {
                                         <p>{post.text}</p>
                                     </article>
 
-                                    {post.images && post.images.map(image => <img src={image} alt='pic' key={image} style={{ width: '150px', height: '100px', objectFit: 'cover' }} />)}
+                                    {post.images && post.images.map(image => <img src={image} alt='pic' key={image} style={{ width: '150px', height: '100px', margin: '1px', objectFit: 'cover' }} />)}
 
                                     <br />
                                     <Divider />
