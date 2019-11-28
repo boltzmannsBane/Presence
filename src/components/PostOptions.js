@@ -27,7 +27,7 @@ function PostOptions({ history, elementName, handleDelete, id, tweetId }) {
 
     const open = Boolean(anchorEl);
 
-    let link = `/users/${id}/${elementName}/${tweetId}`
+    const link = `https://iamamygdala-d2a2a.firebaseapp.com/users/${id}/${elementName}/${tweetId}`
 
     return (
         <>

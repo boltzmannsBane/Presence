@@ -1,6 +1,6 @@
 import React from 'react';
 import './style/App.scss';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 import AuthContextProvider from './components/context/AuthContext';
 import { Gallery } from './components/Gallery';
 import { Tweets } from './components/Tweets';
@@ -21,6 +21,7 @@ const options = {
 };
 
 function App() {
+
   return (
     <Router>
       <AuthContextProvider>
