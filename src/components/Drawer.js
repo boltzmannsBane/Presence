@@ -41,7 +41,7 @@ export default function SwipeableTemporaryDrawer({ id }) {
         setState({ ...state, [side]: open });
     };
 
-    const link = `/users/${id}/gallery`
+    const link = `https://iamamygdala-d2a2a.firebaseapp.com/users/${id}/gallery`
 
     const sideList = side => (
         <div

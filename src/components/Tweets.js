@@ -37,8 +37,8 @@ export const Tweets = ({ match: { params: { id } } }) => {
                     loader={<div className="loader" key={0}>Loading ...</div>}>
                     <SRLWrapper>
                         {posts.map(post =>
-                            <Paper>
-                                <li key={post.id} style={{ marginBottom: '50px', padding: '10px' }}>
+                            <Paper key={post.id}>
+                                <li style={{ marginBottom: '50px', padding: '10px' }}>
 
                                     <article>
                                         <p>{post.text}</p>
