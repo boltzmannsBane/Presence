@@ -123,9 +123,52 @@ body {
 			width: 50%;
 			.gallery {
 				div {
+					display: flex;
+					justify-content: center;
+					flex-wrap: wrap;
 					li {
 						width: 169px;
 						height: 169px;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 1270px) {
+	body {
+		#root {
+			.gallery {
+				div {
+					li {
+						width: 209px;
+						height: 209px;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 1670px) {
+	body {
+		#root {
+			width: 40%;
+			.gallery {
+				div {
+					li {
+						width: 220px;
+						height: 220px;
+					}
+				}
+			}
+			header {
+				padding-top: 70px;
+				.user-info {
+					text-align: start;
+					p {
+						width: 60%;
 					}
 				}
 			}

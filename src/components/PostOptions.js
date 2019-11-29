@@ -27,7 +27,7 @@ function PostOptions({ history, elementName, handleDelete, id, tweetId }) {
 
     const open = Boolean(anchorEl);
 
-    const link = `https://iamamygdala-d2a2a.firebaseapp.com/users/${id}/${elementName}/${tweetId}`
+    const link = `https://presenceweb.app/users/${id}/${elementName}/${tweetId}`
 
     return (
         <>
