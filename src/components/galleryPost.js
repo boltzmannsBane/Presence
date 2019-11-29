@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { SimpleSlider } from './Carousel';
 import PostOptions from './PostOptions';
 import { Footer } from './Footer';
+import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
 
 const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
 
@@ -30,16 +32,18 @@ const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
 
     return post && (
         <>
-        <main style={{ minHeight: '90vh' }}>
+        <main>
+            <Paper>
             <SimpleSlider images={post.images} />
             <div style={{ margin: '10px' }}>
                 <div style={{display: 'flex', justifyContent: 'space-around'}}>
                     <h3>{post.timestamp && post.timestamp.substring(0, 10)}</h3>
                     <PostOptions elementName='galleryPost' tweetId={postId} id={id} handleDelete={handleDelete}/>
                 </div>
-                <article style={{margin: '0 20px 0 20px'}}><p>{post.text}</p></article>
+                <article style={{margin: '0 20px 0 20px', paddingBottom: '20px'}}><p>{post.text}</p></article>
             </div>
 
+            </Paper>
         </main>
         <Footer />
         </>
