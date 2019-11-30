@@ -38,7 +38,7 @@ const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
             <div style={{ margin: '10px' }}>
                 <div style={{display: 'flex', justifyContent: 'space-around'}}>
                     <h3>{post.timestamp && post.timestamp.substring(0, 10)}</h3>
-                    <PostOptions elementName='galleryPost' tweetId={postId} id={id} handleDelete={handleDelete}/>
+                    <PostOptions elementName='gallery' tweetId={postId} id={id} handleDelete={handleDelete}/>
                 </div>
                 <article style={{margin: '0 20px 0 20px', paddingBottom: '20px'}}><p>{post.text}</p></article>
             </div>
