@@ -33,7 +33,7 @@ const Tweet = ({ history, match: { params: { id, tweetId } } }) => {
     return (
         <>
         <Paper>
-        <main className='tweet' style={{margin: '10px', paddingBottom: '20px'}}> 
+        <main className='tweet' style={{margin: '10px', paddingBottom: '40px'}}> 
             <div style={{ display: 'flex', justifyContent: 'space-around', margin: '0 10px 0 10px' }}>
                 <h3>{tweet.timestamp && tweet.timestamp.substring(0, 10)}</h3>
                 <PostOptions elementName='tweet' tweetId={tweetId} id={id} handleDelete={handleDelete} />
