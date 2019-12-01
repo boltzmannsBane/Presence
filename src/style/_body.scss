@@ -123,9 +123,6 @@ body {
 			width: 50%;
 			.gallery {
 				div {
-					display: flex;
-					justify-content: center;
-					flex-wrap: wrap;
 					li {
 						width: 169px;
 						height: 169px;
@@ -144,6 +141,15 @@ body {
 					li {
 						width: 209px;
 						height: 209px;
+					}
+				}
+			}
+			header {
+				padding-top: 70px;
+				.user-info {
+					text-align: start;
+					p {
+						width: 60%;
 					}
 				}
 			}

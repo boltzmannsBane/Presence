@@ -5,6 +5,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { PostForm } from './PostForm';
 import { NavLink as Link } from 'react-router-dom';
 import firebase from '../firebase'
+import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 
@@ -40,8 +41,8 @@ export const Tweets = ({ match: { params: { id } } }) => {
                             <Paper key={post.id}>
                                 <li style={{ marginBottom: '50px', padding: '10px' }}>
 
-                                    <article>
-                                        <p>{post.text}</p>
+                                    <article style={{marginBottom: '20px'}}>
+                                    <Typography variant="body1" >{post.text}</Typography>
                                     </article>
 
                                     {post.images && post.images.map(image => <img src={image} alt='pic' key={image} style={{ width: '150px', height: '100px', margin: '1px', objectFit: 'cover' }} />)}

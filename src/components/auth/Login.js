@@ -6,6 +6,8 @@ import { TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
 import { SubmitButton } from '../SubmitButton';
 import { withRouter } from 'react-router-dom'
+import { NavLink as Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 const Login = (props) => {
 
@@ -50,6 +52,9 @@ const Login = (props) => {
                 <SubmitButton />
             </Form>
         </Formik>
+        <div style={{ margin: '20px 0 0 30px' }}>
+        <Link to='/register'><Button type='button' variant="contained" color="secondary">Register</Button></Link>
+        </div>
     </>
 
 }
