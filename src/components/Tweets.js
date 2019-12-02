@@ -50,7 +50,7 @@ export const Tweets = ({ match: { params: { id } } }) => {
                                     <br />
                                     <Divider />
                                     <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', padding: '10px'}}>
-                                    <Link to={`/users/${id}/tweets/${post.id}`}><p>{post.timestamp.substring(0, 10)}</p></Link>
+                                    <Link to={`/users/${id}/tweets/${post.id}`}><Typography variant="h6" color="primary">{post.timestamp.substring(0, 10)}</Typography></Link>
                                     <PostOptions elementName='tweets' tweetId={post.id} id={id} handleDelete={handleDelete}/>
                                     </div>
                                 </li>
