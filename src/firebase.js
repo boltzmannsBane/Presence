@@ -3,13 +3,13 @@ import 'firebase/auth'
 import 'firebase/firebase-firestore'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBZ3sqzd098t1xikqz-RvviWqXyY0aBkf0",
-    authDomain: "iamamygdala-d2a2a.firebaseapp.com",
-    databaseURL: "https://iamamygdala-d2a2a.firebaseio.com",
-    projectId: "iamamygdala-d2a2a",
-    storageBucket: "iamamygdala-d2a2a.appspot.com",
-    messagingSenderId: "10524574812",
-    appId: "1:10524574812:web:09518f067bc29f8ac29299"
+    apiKey: 
+    authDomain: 
+    databaseURL: 
+    projectId: 
+    storageBucket: 
+    messagingSenderId: 
+    appId: 
 };
 
 class Firebase {
