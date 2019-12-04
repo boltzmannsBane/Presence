@@ -3,7 +3,6 @@ import firebase from '../firebase'
 import { withRouter } from 'react-router-dom';
 import { SRLWrapper } from "simple-react-lightbox";
 import PostOptions from './PostOptions'
-import { Footer } from './Footer';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography'
 
@@ -12,11 +11,10 @@ const Tweet = ({ history, match: { params: { id, tweetId } } }) => {
     const [tweet, setTweet] = useState({})
     const [allTweets, setAllTweets] = useState([])
 
-    const handleDelete = async (deleteId) => {
-        return firebase.getData('users').doc(id).update({
+    const handleDelete = async (deleteId) => firebase.getData('users').doc(id).update({
             tweets: allTweets.filter(post => post.id !== deleteId)
-        })
-    }
+        }).then(() => {history.replace(`/users/${id}/tweets`)})
+
 
     useEffect(() => {
         const getTweet = async () => {
@@ -44,7 +42,6 @@ const Tweet = ({ history, match: { params: { id, tweetId } } }) => {
             </SRLWrapper>}
         </main>
         </Paper>
-        <Footer />
         </>
     )
 }
