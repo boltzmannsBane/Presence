@@ -13,11 +13,10 @@ const GalleryPost = ({ history, match: { params: { id, postId } } }) => {
     const [post, setPost] = useState({})
     const [allPosts, setAllPosts] = useState([])
 
-    const handleDelete = async (deleteId) => {
-        return firebase.getData('users').doc(id).update({
+    const handleDelete = async (deleteId) => firebase.getData('users').doc(id).update({
             gallery: allPosts.filter(post => post.id !== deleteId)
-        })
-    }
+        }).then(() => {history.replace(`/users/${id}/tweets`)})
+
 
     useEffect(() => {
         const getPost = async () => {
