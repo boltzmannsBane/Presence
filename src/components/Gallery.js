@@ -47,6 +47,8 @@ export const Gallery = ({
               </li>
             ))
             .slice(0, count)}
+            <li className='filler'></li>
+            <li className='filler'></li>
         </InfiniteScroll>
       </ul>
     </>

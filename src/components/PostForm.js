@@ -120,7 +120,7 @@ export const PostForm = ({ posts, id, elementName }) => {
                     <Button
                       type="button"
                       variant="contained"
-                      color="primary"
+                      color='primary'
                       style={{ marginTop: "20px" }}
                       onClick={() => arrayHelpers.push("")}
                     >
@@ -128,7 +128,7 @@ export const PostForm = ({ posts, id, elementName }) => {
                     </Button>
                   )}
                   <div>
-                    <SubmitButton />
+                    <SubmitButton values={values} elementName={elementName}/>
                   </div>
                 </div>
               )}
