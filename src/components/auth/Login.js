@@ -15,7 +15,7 @@ const Login = props => {
   async function Login(email, password) {
     try {
       await firebase.login(email, password).then(res => {
-        props.history.replace(`/users/${res.user.uid}`);
+        props.history.replace(`/users/${res.user.uid}/gallery`);
         setAuthStatus(res.user);
       });
     } catch (error) {
@@ -43,28 +43,41 @@ const Login = props => {
             .min(6, "Too short")
         })}
         onSubmit={values => Login(values.email, values.password)}
+        const
+        LoginAsGuest="ayy"
       >
-        <Form style={{ marginLeft: "30px" }}>
-          <h1>Login</h1>
-          <br />
-          <Field
-            name="email"
-            type="text"
-            label="email"
-            component={TextField}
-            style={{ marginTop: "10px", width: "50%" }}
-          />
-          <br />
-          <Field
-            name="password"
-            type="password"
-            label="password"
-            component={TextField}
-            style={{ marginTop: "10px", width: "50%" }}
-          />
-          <br />
-          <SubmitButton />
-        </Form>
+        {({ values, setFieldValue, handleSubmit }) => (
+          <Form style={{ marginLeft: "30px" }}>
+            <h1>Login</h1>
+            <br />
+            <Field
+              name="email"
+              type="text"
+              label="email"
+              component={TextField}
+              style={{ marginTop: "10px", width: "50%" }}
+            />
+            <br />
+            <Field
+              name="password"
+              type="password"
+              label="password"
+              component={TextField}
+              style={{ marginTop: "10px", width: "50%" }}
+            />
+            <br />
+            <SubmitButton />
+            <Button
+              type="button"
+              variant="contained"
+              color="default"
+              onClick={() => Login("guest@gmail.com", "123456")}
+              style={{ marginTop: "20px", marginLeft: "20px" }}
+            >
+              Login as guest
+            </Button>
+          </Form>
+        )}
       </Formik>
       <div style={{ margin: "20px 0 0 30px" }}>
         <Link to="/register">
