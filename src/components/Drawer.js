@@ -63,18 +63,17 @@ export default function SwipeableTemporaryDrawer({ id }) {
               </ListItem>
             </Link>
 
-            <Link to={`/users/${authStatus.uid}/settings`}>
+          {authStatus.uid === id && <Link to={`/users/${authStatus.uid}/settings`}>
               <ListItem button>
                 <ListItemIcon>
                   <SettingsIcon />
                 </ListItemIcon>
                 <ListItemText primary="Edit Profile" />
               </ListItem>
-            </Link>
+            </Link>}
           </>
         )}
-
-        {authStatus && authStatus.uid === id && (
+    
           <CopyToClipboard text={link}>
             <ListItem button>
               <ListItemIcon>
@@ -83,7 +82,6 @@ export default function SwipeableTemporaryDrawer({ id }) {
               <ListItemText primary="Copy Link" />
             </ListItem>
           </CopyToClipboard>
-        )}
 
         {authStatus ? (
           <ListItem
