@@ -24,7 +24,7 @@ const Login = props => {
   }
 
   useEffect(() => {
-    authStatus && props.history.replace(`/users/${authStatus.uid}`);
+    authStatus && props.history.replace(`/users/${authStatus.uid}/gallery`);
   }, [authStatus]);
   useEffect(() => {
     setUserInfo("");

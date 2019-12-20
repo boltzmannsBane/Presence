@@ -60,7 +60,7 @@ const Register = props => {
                   gallery: []
                 });
               cred && setAuthStatus(cred.user);
-              authStatus && props.history.replace(`/users/${cred.user.uid}`);
+              authStatus && props.history.replace(`/users/${cred.user.uid}/gallery`);
             });
         }}
       >
