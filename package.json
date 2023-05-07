@@ -15,7 +15,7 @@
     "react-infinite-scroller": "^1.2.4",
     "react-responsive-carousel": "^3.1.51",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "5.0.1",
     "shortid": "^2.2.15",
     "simple-react-lightbox": "^1.4.3",
     "yup": "^0.27.0"
